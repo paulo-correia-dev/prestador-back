@@ -1,0 +1,5 @@
+1677769114527	Rename package 'br.com.testeobjeto'
+1677807279566	Encapsulate field 'prestador'
+1677807364233	Encapsulate field 'endereco'
+1677811171051	Delete element
+1677813337013	Encapsulate field 'repository'

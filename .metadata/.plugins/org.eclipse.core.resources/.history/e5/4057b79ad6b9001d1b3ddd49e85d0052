@@ -1,0 +1,9 @@
+package br.com.prestadorDeServico.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.prestadorDeServico.entities.Contato;
+
+public interface ContatoRepository extends JpaRepository<Contato, String>{
+
+}

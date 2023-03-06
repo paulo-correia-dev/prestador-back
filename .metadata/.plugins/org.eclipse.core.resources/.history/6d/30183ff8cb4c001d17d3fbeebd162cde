@@ -1,0 +1,126 @@
+package br.com.contasapagar;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController // Essa notação diz que essa classe é uma Controller, ou seja está dizendo que essa é uma aplicação REST
+@RequestMapping("/v1")
+public class ContasController {
+
+    @Autowired
+    ContaRepository repository;
+
+    @GetMapping("/contas")
+    public List<Conta> buscarContas(){
+
+        return repository.buscarContas();
+    }
+
+    @PostMapping("/contas")
+    public Conta cadastrarConta(@RequestBody Conta conta){
+
+        return repository.save(conta);
+    }
+
+    @PutMapping("/contas")
+    public Conta atualizarConta(@RequestBody Conta conta){
+
+        return repository.save(conta);
+    }
+
+    @DeleteMapping("/contas/{id}")
+    public void excluirConta(@PathVariable("id") Integer id){
+        repository.deleteById(id);
+    }
+    
+    @GetMapping("/buscarPorStatus/{baixado}")
+    public ResponseEntity<List<Conta>> buscarPorStatus(@PathVariable("baixado") Boolean baixado){
+    	
+    	List<Conta> conta = repository.buscarPorStatus(baixado);
+    	
+    	return new ResponseEntity<List<Conta>>(conta, HttpStatus.OK);
+    	
+    }
+
+    @GetMapping("/buscarPorMes/{mes}")  
+    @ResponseBody
+    public ResponseEntity<List<Conta>> buscarPorMes(@PathVariable("mes") String mes){
+    	
+    	List<Conta> contas = repository.buscarPorMes(mes);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    @GetMapping("/buscarPorMesBaixado/{mes}/{baixado}")  
+    @ResponseBody
+    public ResponseEntity<List<Conta>> buscarPorMesStatus(@PathVariable("mes") String mes, @PathVariable("baixado") Boolean baixado){
+    	
+    	List<Conta> contas = repository.buscarPorMesStatus(mes, baixado);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    @GetMapping("/buscarPorAnoBaixado/{ano}/{baixado}")  
+    @ResponseBody
+    public ResponseEntity<List<Conta>> buscarPorAnoStatus(@PathVariable("ano") String ano, @PathVariable("baixado") Boolean baixado){
+    	
+    	List<Conta> contas = repository.buscarPorAnoStatus(ano, baixado);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    @GetMapping("/buscarPorDataBaixado/{data_consultaI}/{data_consultaF}/{baixado}")  
+    @ResponseBody
+    public ResponseEntity<List<Conta>> buscarPorDataStatus(@PathVariable("data_consultaI") String data_consultaI, @PathVariable("data_consultaF") String data_consultaF, @PathVariable("baixado") Boolean baixado){
+    	
+    	List<Conta> contas = repository.buscarPorDataStatus(data_consultaI, data_consultaF, baixado);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    @GetMapping("/buscarSoma/{data_consulta}/{baixado}")
+    @ResponseBody
+    public Float buscarSoma(@PathVariable("data_consulta") String data_consulta, @RequestParam("baixado") Boolean baixado){
+
+        return repository.buscarSoma(data_consulta, baixado);
+    }
+    
+    @GetMapping("/buscarPorQtdStatus/{baixado}")    
+    public Integer buscarPorQtdStatus(@PathVariable("baixado") Boolean baixado){
+    	
+    	 return repository.buscarPorQtdStatus(baixado);
+
+    }
+    
+    @GetMapping("/buscarPorData/{data_consultaI}/{data_consultaF}")      
+    public ResponseEntity<List<Conta>> buscarPorData(@PathVariable("data_consultaI") String data_consultaI, @PathVariable("data_consultaF") String data_consultaF){
+    	
+    	List<Conta> contas = repository.buscarPorData(data_consultaI, data_consultaF);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    @GetMapping("/buscarPorAno/{ano}")     
+    public ResponseEntity<List<Conta>> buscarPorAno(@PathVariable("ano") String ano){
+    	
+    	List<Conta> contas = repository.buscarPorAno(ano);
+    	
+    	return new ResponseEntity<List<Conta>>(contas, HttpStatus.OK);
+    }
+    
+    
+}

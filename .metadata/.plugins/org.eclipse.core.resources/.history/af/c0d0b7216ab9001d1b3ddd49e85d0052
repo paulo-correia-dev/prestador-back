@@ -1,0 +1,5 @@
+spring.datasource.url=jdbc:postgresql://localhost:5432/contas_a_pagar
+spring.datasource.username=postgres
+spring.datasource.password=root
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format-sql=true

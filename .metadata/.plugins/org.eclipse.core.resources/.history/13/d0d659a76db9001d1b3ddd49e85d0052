@@ -1,0 +1,5 @@
+package br.com.prestadorDeServico.repositories;
+
+public class EnderecoRepository {
+
+}

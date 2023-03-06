@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;CorsConfiguration.java&apos; to &apos;contas_a_pagar_java/src/main/java/com.example.contas.a.pagar.java&apos;&#x0D;&#x0A;- Original project: &apos;contas-a-pagar-novo&apos;&#x0D;&#x0A;- Destination element: &apos;contas_a_pagar_java/src/main/java/com.example.contas.a.pagar.java&apos;&#x0D;&#x0A;- Original element: &apos;br.com.contasapagar.CorsConfiguration.java&apos;" description="Copy compilation unit" destination="=contas_a_pagar_java/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.contas.a.pagar.java" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;br.com.contasapagar{CorsConfiguration.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1665365798344" units="1" version="1.0"/>
+</session>

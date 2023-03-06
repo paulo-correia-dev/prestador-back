@@ -1,0 +1,43 @@
+package br.com.contasapagar;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ContaRepository extends JpaRepository<Conta, Integer> {
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar")
+	List<Conta> buscarContas();
+	
+	@Query("select c from Conta c where c.baixado is ?1 ")
+	List<Conta> buscarPorStatus(Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'MM') = :mes " )
+	List<Conta> buscarPorMes(String mes);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'MM') = :mes and baixado = :baixado" )
+	List<Conta> buscarPorMesStatus(String mes, Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'YYYY') = :ano and baixado = :baixado" )
+	List<Conta> buscarPorAnoStatus(String ano, Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'YYYY-MM-DD') BETWEEN :data_consultaI AND :data_consultaF AND baixado = :baixado" )
+	List<Conta> buscarPorDataStatus(String data_consultaI, String data_consultaF, Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select SUM(valor) from a_pagar where TO_CHAR(data_vencimento, 'MM') = :data_consulta and baixado = :baixado")
+	Float buscarSoma(String data_consulta, Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select COUNT(baixado) from a_pagar where baixado = :baixado")
+	Integer buscarPorQtdStatus(Boolean baixado);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'YYYY-MM-DD') BETWEEN :data_consultaI AND :data_consultaF " )
+	List<Conta> buscarPorData(String data_consultaI, String data_consultaF);
+	
+	@Query(nativeQuery = true, value = "select * from a_pagar where TO_CHAR(data_vencimento, 'YYYY') = :ano " )
+	List<Conta> buscarPorAno(String ano);
+	
+
+}

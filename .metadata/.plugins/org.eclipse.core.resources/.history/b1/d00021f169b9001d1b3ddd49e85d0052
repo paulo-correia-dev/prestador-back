@@ -1,0 +1,1 @@
+insert into prestador_servico (cnpj, razao_social, data_abertura, telefone, email) values ("0123456890123", "Primeiro Insert", '2023-03-02', "01234567890", "primeiro@gmail.com" );
